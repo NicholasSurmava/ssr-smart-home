@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "dev:pub": "parcel watch src/public/index.js -d src/public/dist"
   },
   "keywords": [],
   "author": "",
