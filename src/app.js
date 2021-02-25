@@ -8,14 +8,15 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "public")));
 
-// https://api.oceandrivers.com:443/v1.0/getAemetStation/aeropuertopalma/lastdata/
-// TODO: get request for weather ^
 getWeather = async () => {
   try {
     const response = await fetch(
-      "https://api.oceandrivers.com:443/v1.0/getAemetStation/aeropuertopalma/lastdata/"
+      "https://api.oceandrivers.com:443/v1.0/getEasyWind/EW013/?period=latestdata"
     );
     const weather = await response.json();
+
+    console.log("Getting Weather Info");
+
     return weather;
   } catch (err) {
     // handle error
@@ -23,33 +24,67 @@ getWeather = async () => {
   }
 };
 
-let powerInfo = {
-  batteries: "good",
-  breakers: "good",
-  voltage: "26.7v",
+getPower = async () => {
+  try {
+    let powerInfo = {
+      batteries: "good",
+      breakers: "good",
+      voltage: "26.7v",
+    };
+
+    console.log("Getting Power Info");
+
+    return powerInfo;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-let waterInfo = {
-  water_level: "good",
-  water_quality: "good",
+getWater = async () => {
+  try {
+    let waterInfo = {
+      water_level: "good",
+      water_quality: "good",
+    };
+
+    console.log("Getting Water Info");
+
+    return waterInfo;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
-let internetInfo = {
-  isp: "Comcast",
-  speed: "1000 mbps",
-  internet_health: "good",
+getInternet = async () => {
+  try {
+    let internetInfo = {
+      isp: "Comcast",
+      speed: "1000 mbps",
+      internet_health: "good",
+    };
+
+    console.log("Getting Internet Info");
+
+    return internetInfo;
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 app.get("/", (req, res) => {
-  const viewData = {
-    powerInfo,
-    waterInfo,
-    internetInfo,
-  };
+  const viewData = {};
 
   (async () => {
     const weatherInfo = await getWeather();
+    const powerInfo = await getPower();
+    const waterInfo = await getWater();
+    const internetInfo = await getInternet();
+
     viewData["weatherInfo"] = weatherInfo;
+    viewData["powerInfo"] = powerInfo;
+    viewData["waterInfo"] = waterInfo;
+    viewData["internetInfo"] = internetInfo;
+
     res.render("index", viewData);
   })();
 });
