@@ -71,14 +71,25 @@ getInternet = async () => {
   }
 };
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 app.get("/", (req, res) => {
   const viewData = {};
 
   (async () => {
-    const weatherInfo = await getWeather();
+    console.time("Execution Time");
+    await delay(2000);
     const powerInfo = await getPower();
+    await delay(3000);
     const waterInfo = await getWater();
+    await delay(5000);
     const internetInfo = await getInternet();
+    await delay(10000);
+    const weatherInfo = await getWeather();
+
+    console.timeEnd("Execution Time");
 
     viewData["weatherInfo"] = weatherInfo;
     viewData["powerInfo"] = powerInfo;
