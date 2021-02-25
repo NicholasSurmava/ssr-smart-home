@@ -56,8 +56,18 @@ html {
 .home__summary {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+}
+
+.home__summary h2 {
+  text-align: center;
 }
 
 .home__summary div {
   margin: 20px;
+}
+
+.info__container {
+  display: flex;
+  justify-content: space-evenly;
 }
