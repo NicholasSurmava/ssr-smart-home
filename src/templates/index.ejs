@@ -41,12 +41,26 @@
             </div>
             <div class="power__info">
               <h3>Power Info</h3>
+              <ul>
+                <li>Batteries: <%= powerInfo.batteries %></li>
+                <li>Breakers: <%= powerInfo.breakers %></li>
+                <li>Voltage: <%= powerInfo.voltage %></li>
+              </ul>
             </div>
             <div class="water__info">
               <h3>Water Info</h3>
+              <ul>
+                <li>Water Level: <%= waterInfo.water_level %></li>
+                <li>Water Quality: <%= waterInfo.water_quality %></li>
+              </ul>
             </div>
             <div class="internet__info">
               <h3>internet Info</h3>
+              <ul>
+                <li>ISP: <%= internetInfo.isp %></li>
+                <li>Speed: <%= internetInfo.speed %></li>
+                <li>Health: <%= internetInfo.internet_health %></li>
+              </ul>
             </div>
           </div>
         </section>
