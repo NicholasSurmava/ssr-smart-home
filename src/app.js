@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 getWeather = async () => {
   try {
+    await delay(10000);
     const response = await fetch(
       "https://api.oceandrivers.com:443/v1.0/getEasyWind/EW013/?period=latestdata"
     );
@@ -26,6 +27,7 @@ getWeather = async () => {
 
 getPower = async () => {
   try {
+    await delay(2000);
     let powerInfo = {
       batteries: "good",
       breakers: "good",
@@ -42,6 +44,7 @@ getPower = async () => {
 
 getWater = async () => {
   try {
+    await delay(3000);
     let waterInfo = {
       water_level: "good",
       water_quality: "good",
@@ -57,6 +60,7 @@ getWater = async () => {
 
 getInternet = async () => {
   try {
+    await delay(5000);
     let internetInfo = {
       isp: "Comcast",
       speed: "1000 mbps",
@@ -80,13 +84,13 @@ app.get("/", (req, res) => {
 
   (async () => {
     console.time("Execution Time");
-    await delay(2000);
+
     const powerInfo = await getPower();
-    await delay(3000);
+
     const waterInfo = await getWater();
-    await delay(5000);
+
     const internetInfo = await getInternet();
-    await delay(10000);
+
     const weatherInfo = await getWeather();
 
     console.timeEnd("Execution Time");
